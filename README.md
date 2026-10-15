@@ -11,7 +11,7 @@ MazeMind is an interactive web application that visualizes how Artificial Intell
 ![MazeMind showing the solved maze](screenshots/ai-solution.jpg)
 
 ### Algorithm Comparison
-![Comparison of BFS, DFS and A*](screenshots/comparison.jpg)
+![Comparison of BFS, DFS and A*](screenshots/Comparison.jpg)
 
 
 ## ✨ Features
