@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MazeMind is an interactive AI maze solver that visualizes BFS, DFS and A* pathfinding algorithms.">
+    <title>MazeMind | AI Maze Solver</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/algorithms.js" defer></script>
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">
+            <span class="logo-icon" aria-hidden="true">M.</span>
+            <span>Maze<span class="highlight">Mind</span></span>
+        </a>
+
+        <p class="header-label">AI PATHFINDING LAB</p>
+    </header>
+
+    <main class="main-container">
+        <section class="hero">
+            <p class="eyebrow">EXPLORE • SEARCH • SOLVE</p>
+            <h1>Find the <span class="highlight">way out.</span></h1>
+            <p class="hero-description">
+                Build a maze, choose an algorithm, and watch AI find its path.
+            </p>
+        </section>
+
+        <section class="workspace">
+            <aside class="panel controls-panel">
+                <div class="panel-heading">
+                    <h2>Controls</h2>
+                    <span class="status-dot"></span>
+                </div>
+
+                <div class="control-group">
+                    <label for="algorithm">Search Algorithm</label>
+                    <select id="algorithm">
+                        <option value="bfs">Breadth-First Search (BFS)</option>
+                        <option value="dfs">Depth-First Search (DFS)</option>
+                        <option value="astar">A* Search</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="maze-size">Maze Size</label>
+                    <select id="maze-size">
+                        <option value="15">Small</option>
+                        <option value="21" selected>Medium</option>
+                        <option value="31">Large</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="speed">Animation Speed</label>
+                    <select id="speed">
+                        <option value="100">Slow</option>
+                        <option value="40" selected>Normal</option>
+                        <option value="10">Fast</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="tool">Maze Editor</label>
+                    <select id="tool">
+                        <option value="wall">Draw Walls</option>
+                        <option value="start">Move Start</option>
+                        <option value="goal">Move Goal</option>
+                        <option value="erase">Erase Walls</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button id="generate-btn" class="button secondary-button">
+                        Generate Maze
+                    </button>
+                    
+<button id="solve-btn" class="button primary-button">Solve Maze</button>
+<button id="compare-btn" class="button secondary-button">Compare Algorithms</button>
+<button id="pause-btn" class="button secondary-button" disabled>Pause</button>
+<button id="reset-btn" class="button secondary-button">Reset</button>
+
+                    </button>
+                </div>
+            </aside>
+
+            <section class="panel maze-panel">
+                <div class="panel-heading maze-heading">
+                    <div>
+                        <h2>Your Maze</h2>
+                        <p id="maze-status">Ready to explore</p>
+                    </div>
+                    <span class="badge">INTERACTIVE</span>
+                </div>
+
+                <div class="maze-wrapper">
+                    <div id="maze-grid" class="maze-grid"
+                         role="grid" aria-label="Interactive maze">
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <span><i class="legend-cell start-cell"></i> Start</span>
+                    <span><i class="legend-cell goal-cell"></i> Goal</span>
+                    <span><i class="legend-cell wall-cell"></i> Wall</span>
+                    <span><i class="legend-cell visited-cell"></i> Explored</span>
+                    <span><i class="legend-cell path-cell"></i> Path</span>
+                </div>
+            </section>
+
+            <aside class="panel stats-panel">
+                <div class="panel-heading">
+                    <h2>Statistics</h2>
+                </div>
+
+                <div class="stat-card">
+                    <p>Cells Explored</p>
+                    <strong id="explored-count">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <p>Path Length</p>
+                    <strong id="path-length">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <p>Execution Time</p>
+                    <strong id="execution-time">0 ms</strong>
+                </div>
+
+                <div class="stat-card">
+                    <p>Algorithm</p>
+                    <strong id="active-algorithm">BFS</strong>
+                </div>
+
+                <div class="result-card" id="result-card" aria-live="polite">
+                    <h3>Ready when you are</h3>
+                    <p>Choose an algorithm and solve your maze.</p>
+                </div>
+            </aside>
+        </section>
+        
+    </section>
+
+    <section class="panel comparison-panel" id="comparison-panel" hidden>
+        <div class="panel-heading">
+            <div>
+                <h2>Algorithm Comparison</h2>
+                <p>Compare all three algorithms on the same maze.</p>
+            </div>
+            <span class="badge">BENCHMARK</span>
+        </div>
+
+        <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Cells Explored</th>
+                        <th>Path Length</th>
+                        <th>Execution Time</th>
+                        <th>Shortest Path</th>
+                    </tr>
+                </thead>
+                <tbody id="comparison-results"></tbody>
+            </table>
+        </div>
+
+        <p class="comparison-note">
+            Execution times may vary between runs and devices.
+            All algorithms are tested on the same maze.
+        </p>
+    </section>
+
+    <section class="info-section">
+
+
+        <section class="info-section">
+            <div class="info-heading">
+                <p class="eyebrow">UNDER THE HOOD</p>
+                <h2>Three algorithms. Three strategies.</h2>
+                <p>Compare how different AI search techniques explore a maze.</p>
+            </div>
+
+            <div class="algorithm-cards">
+                <article class="algorithm-card">
+                    <span class="algorithm-number">01</span>
+                    <h3>Breadth-First Search</h3>
+                    <p>Explores level by level to find a shortest path in an unweighted maze.</p>
+                </article>
+
+                <article class="algorithm-card">
+                    <span class="algorithm-number">02</span>
+                    <h3>Depth-First Search</h3>
+                    <p>Explores deeply along a route before backtracking when necessary.</p>
+                </article>
+
+                <article class="algorithm-card">
+                    <span class="algorithm-number">03</span>
+                    <h3>A* Search</h3>
+                    <p>Uses a distance heuristic to guide its search toward the destination.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>MazeMind — An introductory Artificial Intelligence project.</p>
+        <p>Built to explore the science of pathfinding.</p>
+    </footer>
+</body>
+</html>
