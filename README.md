@@ -2,6 +2,18 @@
 
 MazeMind is an interactive web application that visualizes how Artificial Intelligence search algorithms solve mazes. Users can create and edit mazes, select a search algorithm, watch the exploration process, and compare algorithm performance.
 
+## Screenshots
+
+### Main Interface
+![MazeMind home screen](screenshots/home.jpg)
+
+### Maze Solved
+![MazeMind showing the solved maze](screenshots/ai-solution.jpg)
+
+### Algorithm Comparison
+![Comparison of BFS, DFS and A*](screenshots/comparison.jpg)
+
+
 ## ✨ Features
 
 - **Interactive Maze Editor:** Draw and erase walls, and move the start and goal positions.
